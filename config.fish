@@ -1,0 +1,106 @@
+# ~/.config/fish/config.fish
+# Portable fish configuration managed by Ansible
+
+#--------------------
+# Bootstrap Fisher
+#--------------------
+if not functions -q fisher
+    echo "Bootstrapping Fisher..."
+    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
+end
+
+#-----------------
+# Custom greeting
+#-----------------
+function fish_greeting
+    echo ''
+    echo '   O      /`·.¸'
+    echo '  o      /¸...¸`:·'
+    echo '   o ¸.·´  ¸   `·.¸.·´)'
+    echo '    : © ):´;      ¸  {'
+    echo '     `·.¸ `·  ¸.·´\\`·¸)'
+    echo '         `\\\\´´\\¸.·´'
+    echo ''
+end
+
+#-----------------------
+# Environment variables
+#-----------------------
+# Text editor
+set -gx EDITOR nano
+set -gx VISUAL nano
+
+#------------------
+# PATH adjustments
+#------------------
+if test -d ~/.local/bin
+    if not contains -- ~/.local/bin $PATH
+        set -p PATH ~/.local/bin
+    end
+end
+
+if test -d ~/.npm-global/bin
+    if not contains -- ~/.npm-global/bin #PATH
+        set -p PATH ~/.npm-global/bin
+    end
+end
+
+#---------
+# Aliases
+#---------
+# Directory listings
+alias ls='eza -al --color=always --group-directories-first --icons'
+alias la='eza -a --color=always --group-directories-first --icons'
+alias ll='eza -l --color=always --group-directories-first --icons'
+alias lt='eza -aT --color=always --group-directories-first --icons'
+
+# Common utility aliases
+alias grep='grep --color=auto'
+alias fgrep='fgrep --color=auto'
+alias egrep='egrep --color=auto'
+alias wget='wget -c'
+alias psmem='ps auxf | sort -nr -k 4'
+alias psmem10='ps auxf | sort -nr -k 4 | head -10'
+# Run command with sudo, or run previous command with sudo if no arguments are given (like sudo !!)
+function please
+    if test (count $argv) -eq 0
+        eval sudo $history[1]
+    else
+        sudo $argv
+    end
+end
+alias pls=please
+alias plz=please
+alias tarnow='tar -acf'
+alias untar='tar -zxvf'
+
+#---------------------------------------
+# Bang-bang (!!) and last-argument (!$)
+#---------------------------------------
+function __history_previous_command
+    switch (commandline -t)
+        case "!"
+            commandline -t $history[1]
+            commandline -f repaint
+        case "*"
+            commandline -i !
+    end
+end
+
+function __history_previous_command_arguments
+    switch (commandline -t)
+        case "!"
+            commandline -t ""
+            commandline -f history-token-search-backward
+        case "*"
+            commandline -i '$'
+    end
+end
+
+if [ "$fish_key_bindings" = "fish_vi_key_bindings" ]
+    bind -Minsert ! __history_previous_command
+    bind -Minsert '$' __history_previous_command_arguments
+else
+    bind ! __history_previous_command
+    bind '$' __history_previous_command_arguments
+end

@@ -1,0 +1,16 @@
+# Ignore all files by default
+*
+
+# Allow the main config files and this gitignore
+!.gitignore
+!config.fish
+!fish_plugins
+
+# Allow conf.d directory structure
+!conf.d/
+conf.d/*
+
+# Unignore specific config files inside conf.d
+!conf.d/arch.fish
+!conf.d/debian.fish
+!conf.d/done_config.fish
