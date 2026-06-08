@@ -1,14 +1,6 @@
 # ~/.config/fish/config.fish
 # Portable fish configuration managed by Ansible
 
-#--------------------
-# Bootstrap Fisher
-#--------------------
-if not functions -q fisher
-    echo "Bootstrapping Fisher..."
-    curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source && fisher install jorgebucaran/fisher
-end
-
 #-----------------
 # Custom greeting
 #-----------------

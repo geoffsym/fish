@@ -5,3 +5,8 @@
 !.gitignore
 !config.fish
 !fish_plugins
+
+# Whitelist fisher function
+!functions/
+functions/*
+!functions/fisher.fish
