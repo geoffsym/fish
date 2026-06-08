@@ -1,6 +1,9 @@
 # Ignore everything by default
 *
 
+# Whitelist README
+!README.md
+
 # Whitelist our specific configuration files
 !.gitignore
 !config.fish
