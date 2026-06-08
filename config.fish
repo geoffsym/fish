@@ -137,3 +137,12 @@ function please
 end
 alias pls=please
 alias plz=please
+
+#--------------------------
+# Fisher Bootstrap/Plugins
+#--------------------------
+# Ensure fisher is registered as an installed plugin
+set -q _fisher_plugins; or set -U _fisher_plugins
+if not contains jorgebucaran/fisher $_fisher_plugins
+    set -Ua _fisher_plugins jorgebucaran/fisher
+end

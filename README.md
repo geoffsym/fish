@@ -10,6 +10,17 @@ I use [fisher](https://github.com/jorgebucaran/fisher) to manage these plugins:
 - [pure](https://github.com/pure-fish/pure)
 - [autopair.fish](https://github.com/jorgebucaran/autopair.fish)
 
+## Installation
+
+To set up this configuration on a new machine:
+
+1. Clone this repository to `~/.config/fish`.
+2. Bootstrap Fisher by sourcing the bundled function:
+   ```fish
+   source ~/.config/fish/functions/fisher.fish && fisher update
+   ```
+   *(On startup, the configuration automatically registers `jorgebucaran/fisher` in your shell's `_fisher_plugins` universal variable, preventing any conflicts during updates).*
+
 ## Key Features
 
 - Custom greeting
