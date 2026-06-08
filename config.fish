@@ -53,16 +53,6 @@ alias egrep='egrep --color=auto'
 alias wget='wget -c'
 alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
-# Run command with sudo, or run previous command with sudo if no arguments are given (like sudo !!)
-function please
-    if test (count $argv) -eq 0
-        eval sudo $history[1]
-    else
-        sudo $argv
-    end
-end
-alias pls=please
-alias plz=please
 alias tarnow='tar -acf'
 alias untar='tar -zxvf'
 
@@ -117,3 +107,17 @@ else if test -f /etc/debian_version
     set -gx MANROFFOPT "-c"
     set -gx MANPAGER "sh -c 'col -bx | batcat -l man -p'"
 end
+
+#-----------------
+# Please Function
+#-----------------
+# Run command with sudo, or run previous command with sudo if no arguments are given (like sudo !!)
+function please
+    if test (count $argv) -eq 0
+        eval sudo $history[1]
+    else
+        sudo $argv
+    end
+end
+alias pls=please
+alias plz=please
