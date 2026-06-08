@@ -104,3 +104,24 @@ else
     bind ! __history_previous_command
     bind '$' __history_previous_command_arguments
 end
+
+#-------------------------
+# OS-Specific Adjustments
+#-------------------------
+if test -f /etc/arch-release
+    # Arch Linux family specific fish configuration
+    # Format man pages with bat
+    set -gx MANROFFOPT "-c"
+    set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
+else if test -f /etc/debian_version
+    # Debian family specific fish configuration
+    # The bat package installs as batcat on Debian/Ubuntu
+    alias bat=batcat
+
+    # The fd-find package installs as fdfind on Debian/Ubuntu
+    alias fd=fdfind
+
+    # Format man pages with batcat
+    set -gx MANROFFOPT "-c"
+    set -gx MANPAGER "sh -c 'col -bx | batcat -l man -p'"
+end
