@@ -37,16 +37,9 @@ if test -d ~/.npm-global/bin
     end
 end
 
-#---------
-# Aliases
-#---------
-# Directory listings
-alias ls='eza -al --color=always --group-directories-first --icons'
-alias la='eza -a --color=always --group-directories-first --icons'
-alias ll='eza -l --color=always --group-directories-first --icons'
-alias lt='eza -aT --color=always --group-directories-first --icons'
-
-# Common utility aliases
+#-----------------
+# Utility Aliases
+#-----------------
 alias grep='grep --color=auto'
 alias fgrep='fgrep --color=auto'
 alias egrep='egrep --color=auto'
@@ -55,6 +48,29 @@ alias psmem='ps auxf | sort -nr -k 4'
 alias psmem10='ps auxf | sort -nr -k 4 | head -10'
 alias tarnow='tar -acf'
 alias untar='tar -zxvf'
+
+#----------------------------
+# Directory Listings Aliases
+#----------------------------
+# If a nerd font is installed, make sure a universial env var is exported:
+#
+#     set -Ux NERD_FONT 1
+#
+# To ensure $NERD_FONT is transmitted to remote hosts, add the following line to ~/.ssh/config file on the client machine:
+#
+#     SendEnv NERD_FONT
+#
+if set -q NERD_FONT
+    alias ls='eza -al --color=always --group-directories-first --icons'
+    alias la='eza -a --color=always --group-directories-first --icons'
+    alias ll='eza -l --color=always --group-directories-first --icons'
+    alias lt='eza -aT --color=always --group-directories-first --icons'
+else
+    alias ls='eza -al --color=always --group-directories-first'
+    alias la='eza -a --color=always --group-directories-first'
+    alias ll='eza -l --color=always --group-directories-first'
+    alias lt='eza -aT --color=always --group-directories-first'
+end
 
 #---------------------------------------
 # Bang-bang (!!) and last-argument (!$)
