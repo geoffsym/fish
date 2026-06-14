@@ -32,7 +32,7 @@ if test -d ~/.local/bin
 end
 
 if test -d ~/.npm-global/bin
-    if not contains -- ~/.npm-global/bin #PATH
+    if not contains -- ~/.npm-global/bin $PATH
         set -p PATH ~/.npm-global/bin
     end
 end
@@ -95,7 +95,7 @@ function __history_previous_command_arguments
     end
 end
 
-if [ "$fish_key_bindings" = "fish_vi_key_bindings" ]
+if [ "$fish_key_bindings" = fish_vi_key_bindings ]
     bind -Minsert ! __history_previous_command
     bind -Minsert '$' __history_previous_command_arguments
 else
@@ -109,7 +109,7 @@ end
 if test -f /etc/arch-release
     # Arch Linux family specific fish configuration
     # Format man pages with bat
-    set -gx MANROFFOPT "-c"
+    set -gx MANROFFOPT -c
     set -gx MANPAGER "sh -c 'col -bx | bat -l man -p'"
 else if test -f /etc/debian_version
     # Debian family specific fish configuration
@@ -120,7 +120,7 @@ else if test -f /etc/debian_version
     alias fd=fdfind
 
     # Format man pages with batcat
-    set -gx MANROFFOPT "-c"
+    set -gx MANROFFOPT -c
     set -gx MANPAGER "sh -c 'col -bx | batcat -l man -p'"
 end
 
